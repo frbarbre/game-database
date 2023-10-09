@@ -10,7 +10,7 @@ export default async function Home() {
     `fields *; search "${searchParams}"; limit 100; where version_parent = null;`
   );
   // console.log(search);
-  const gameid = "112875";
+  const gameid = "19560";
 
   const game = await fetchGameData(
     "games",
@@ -33,27 +33,25 @@ export default async function Home() {
   // console.log(gameData);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {gameCollections[0].games.map((collection) => {
-        return (
-          <Fragment key={collection}>
-            {/* <img
+    <main className="flex min-h-screen items-center justify-between p-24">
+      {gameCollections[0].games.map((collection) => (
+        <Fragment key={collection}>
+          {/* <img
               src={`https://images.igdb.com/igdb/image/upload/t_1080p/${screenshot.image_id}.png`}
               alt=""
               width={screenshot.width}
               height={screenshot.height}
             /> */}
-            {/* <iframe
+          {/* <iframe
             width="462"
             height="260"
             src={`https://www.youtube.com/embed/${screenshot.video_id}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           ></iframe> */}
-            {collection != gameid && <Game gameId={collection} />}
-          </Fragment>
-        );
-      })}
+          {collection == gameid && <Game gameId={collection} />}
+        </Fragment>
+      ))}
     </main>
   );
 }
