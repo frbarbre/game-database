@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export default function Search() {
-  const [input, setInput] = useState("");
+export default function Search({ searchParams }) {
+  const [input, setInput] = useState(searchParams.search || "");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -11,7 +11,10 @@ export default function Search() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex items-center justify-center pt-10">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full flex items-center justify-center pt-10"
+    >
       <input
         type="text"
         placeholder="Search for a game"
