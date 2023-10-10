@@ -1,3 +1,4 @@
+import Search from "../components/Search";
 import Game from "../components/Game";
 import { fetchGameData } from "../lib/fetchGameData";
 
@@ -6,7 +7,7 @@ export default async function Home({ searchParams }) {
 
   const search = await fetchGameData(
     "games",
-    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & total_rating != null & version_parent = null & first_release_date != null & keywords != (2004, 2555) & category = (0, 10); limit 100; sort total_rating desc;`
+    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & version_parent = null & first_release_date != null & keywords != (2004, 2555) & category = (0, 10); limit 100; sort first_release_date desc;`
   );
   console.log(search);
 
@@ -35,18 +36,21 @@ export default async function Home({ searchParams }) {
   );
 
   return (
-    <main className="flex min-h-screen items-center justify-between p-24 flex-wrap">
-      {gameid && <Game gameId={gameid} isSpecificGame={true} />}
-      {searchLine && (
-        <>
-          <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
-          <article className="flex flex-wrap gap-10">
-            {search.map((game) => (
-              <Game gameId={game?.id} key={game?.id} />
-            ))}
-          </article>
-        </>
-      )}
-    </main>
+    <div>
+      <Search />
+      <main className="flex min-h-screen items-center justify-between p-24 flex-wrap">
+        {gameid && <Game gameId={gameid} isSpecificGame={true} />}
+        {searchLine && (
+          <>
+            <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
+            <article className="flex flex-wrap gap-10">
+              {search.map((game) => (
+                <Game gameId={game?.id} key={game?.id} />
+              ))}
+            </article>
+          </>
+        )}
+      </main>
+    </div>
   );
 }

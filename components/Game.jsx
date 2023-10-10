@@ -43,7 +43,9 @@ export default async function Game({ gameId, isSpecificGame }) {
         <div>
           <h1>{collectionItem[0]?.name}</h1>
           <h2>{collectionRelease[0]?.human}</h2>
-          <h3>{collectionItem[0]?.total_rating.toFixed(0) / 10}</h3>
+          {collectionItem[0]?.total_rating && (
+            <h3>{collectionItem[0]?.total_rating.toFixed(0) / 10}</h3>
+          )}
           {genres?.map((genre) => {
             return (
               <h4 className="text-purple-800 text-sm" key={genre.id}>
