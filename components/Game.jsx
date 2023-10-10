@@ -6,7 +6,7 @@ export default async function Game({ gameId, isSpecificGame }) {
     `fields *; where id = ${gameId};`
   );
 
-  if (!collectionItem[0]?.id) return null;
+  if (!collectionItem) return null;
 
   const collectionRelease = await fetchGameData(
     "release_dates",
@@ -38,59 +38,63 @@ export default async function Game({ gameId, isSpecificGame }) {
   );
 
   return (
-    <div>
-      <h1>{collectionItem[0]?.name}</h1>
-      <h2>{collectionRelease[0]?.human}</h2>
-      <h3>{collectionItem[0]?.aggregated_rating}</h3>
-      {genres?.map((genre) => {
-        return (
-          <h4 className="text-purple-800 text-sm" key={genre.id}>
-            {genre.name}
-          </h4>
-        );
-      })}
-      <img
-        src={`https://images.igdb.com/igdb/image/upload/t_1080p/${collectionCover[0]?.image_id}.png`}
-        alt=""
-        width={collectionCover[0]?.width}
-        height={collectionCover[0]?.height}
-        className="max-w-[300px]"
-      />
-      {isSpecificGame && (
-        <>
-          <h2 className="pt-10">RECOMMENDED</h2>
-          <div className="flex flex-wrap pt-4">
-            {similarGames && (
-              <>
-                {similarGames.map((game) => {
-                  const cover = similarGamesCovers.find(
-                    (cover) => cover.game === game.id
-                  );
+    <>
+      {collectionCover && collectionItem && collectionRelease && (
+        <div>
+          <h1>{collectionItem[0]?.name}</h1>
+          <h2>{collectionRelease[0]?.human}</h2>
+          <h3>{collectionItem[0]?.aggregated_rating}</h3>
+          {genres?.map((genre) => {
+            return (
+              <h4 className="text-purple-800 text-sm" key={genre.id}>
+                {genre.name}
+              </h4>
+            );
+          })}
+          <img
+            src={`https://images.igdb.com/igdb/image/upload/t_1080p/${collectionCover[0]?.image_id}.png`}
+            alt=""
+            width={collectionCover[0]?.width}
+            height={collectionCover[0]?.height}
+            className="max-w-[300px]"
+          />
+          {isSpecificGame && (
+            <>
+              <h2 className="pt-10">RECOMMENDED</h2>
+              <div className="flex flex-wrap pt-4">
+                {similarGames && (
+                  <>
+                    {similarGames.map((game) => {
+                      const cover = similarGamesCovers.find(
+                        (cover) => cover.game === game.id
+                      );
 
-                  const release = similarGamesRelease.find(
-                    (release) => release.game === game.id
-                  );
+                      const release = similarGamesRelease.find(
+                        (release) => release.game === game.id
+                      );
 
-                  return (
-                    <div key={game?.id}>
-                      <h2>{game?.name}</h2>
-                      <h3>{release?.human}</h3>
-                      <h4>{game?.aggregated_rating}</h4>
-                      <img
-                        src={`https://images.igdb.com/igdb/image/upload/t_1080p/${cover?.image_id}.png`}
-                        alt=""
-                        width={collectionCover[0]?.width}
-                        height={collectionCover[0]?.height}
-                        className="max-w-[300px]"
-                      />
-                    </div>
-                  );
-                })}
-              </>
-            )}
-          </div>
-        </>
+                      return (
+                        <div key={game?.id}>
+                          <h2>{game?.name}</h2>
+                          <h3>{release?.human}</h3>
+                          <h4>{game?.aggregated_rating}</h4>
+                          <img
+                            src={`https://images.igdb.com/igdb/image/upload/t_1080p/${cover?.image_id}.png`}
+                            alt=""
+                            width={collectionCover[0]?.width}
+                            height={collectionCover[0]?.height}
+                            className="max-w-[300px]"
+                          />
+                        </div>
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }
