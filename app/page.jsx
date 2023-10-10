@@ -3,11 +3,11 @@ import { fetchGameData } from "@/lib/fetchGameData";
 import { Fragment } from "react";
 
 export default async function Home({ searchParams }) {
-  const searchLine = "Mario";
+  const searchLine = searchParams.search;
 
   const search = await fetchGameData(
     "games",
-    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ "${searchLine}"* & version_parent = null & parent_game = null & first_release_date != null & keywords != (2004, 2555) & category = 0; limit 20; sort first_release_date desc;`
+    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & version_parent = null & parent_game = null & first_release_date != null & keywords != (2004, 2555) & keywords != null & category = 0; limit 20; sort first_release_date desc;`
   );
   console.log(search);
   const gameid = searchParams.id;
@@ -42,26 +42,30 @@ export default async function Home({ searchParams }) {
   // console.log(gameData);
 
   return (
-    <main className="flex min-h-screen items-center justify-between p-24">
-      {gameCollections[0].games.map((collection) => (
-        <Fragment key={collection}>
-          {/* <img
+    <main className="flex min-h-screen items-center justify-between p-24 flex-wrap">
+      <Game gameId={gameid} isSpecificGame={true} />
+
+      <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
+      <article className="flex flex-wrap gap-10">
+        {search.map((game) => (
+          <Fragment key={game?.id}>
+            {/* <img
               src={`https://images.igdb.com/igdb/image/upload/t_1080p/${screenshot.image_id}.png`}
               alt=""
               width={screenshot.width}
               height={screenshot.height}
             /> */}
-          {/* <iframe
+            {/* <iframe
             width="462"
             height="260"
             src={`https://www.youtube.com/embed/${screenshot.video_id}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
           ></iframe> */}
-          {collection == gameid && <Game gameId={collection} />}
-        </Fragment>
-      ))}
-      <Game gameId={gameid} />
+            <Game gameId={game?.id} />
+          </Fragment>
+        ))}
+      </article>
     </main>
   );
 }
