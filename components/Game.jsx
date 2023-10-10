@@ -8,6 +8,7 @@ export default async function Game({ gameId, isSpecificGame }) {
 
   if (!collectionItem) return null;
 
+  
   const collectionRelease = await fetchGameData(
     "release_dates",
     `fields *; where game = ${collectionItem[0]?.id};`
