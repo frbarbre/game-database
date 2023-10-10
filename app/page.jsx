@@ -3,11 +3,11 @@ import { fetchGameData } from "@/lib/fetchGameData";
 import { Fragment } from "react";
 
 export default async function Home({ searchParams }) {
-  const searchLine = "Super Mario";
+  const searchLine = "Mario";
 
   const search = await fetchGameData(
     "games",
-    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & version_parent = null & parent_game = null & first_release_date != null & keywords != (2004, 2555); limit 20; sort first_release_date desc;`
+    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & version_parent = null & parent_game = null & first_release_date != null & keywords != (2004, 2555) & category = 0; limit 20; sort first_release_date desc;`
   );
   console.log(search);
   const gameid = searchParams.id;
