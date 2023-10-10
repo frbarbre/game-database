@@ -54,11 +54,12 @@ export default async function Game({ gameId, isSpecificGame }) {
             );
           })}
           <img
-            src={`https://images.igdb.com/igdb/image/upload/t_720p/${collectionCover[0]?.image_id}.png`}
+            src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${collectionCover[0]?.image_id}.png`}
             alt=""
             width={collectionCover[0]?.width}
             height={collectionCover[0]?.height}
             className="max-w-[300px]"
+            loading="lazy"
           />
           {isSpecificGame && (
             <>
@@ -81,11 +82,12 @@ export default async function Game({ gameId, isSpecificGame }) {
                           <h3>{release?.human}</h3>
                           <h4>{game?.aggregated_rating}</h4>
                           <img
-                            src={`https://images.igdb.com/igdb/image/upload/t_1080p/${cover?.image_id}.png`}
+                            src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${cover?.image_id}.png`}
                             alt=""
                             width={collectionCover[0]?.width}
                             height={collectionCover[0]?.height}
                             className="max-w-[300px]"
+                            loading="lazy"
                           />
                         </div>
                       );
