@@ -73,7 +73,7 @@ export default async function Game({ gameId }) {
                 <div key={game?.id}>
                   <h2>{game?.name}</h2>
                   <h3>{release?.human}</h3>
-                  <h4>{game.aggregated_rating}</h4>
+                  <h4>{game?.aggregated_rating}</h4>
                   <img
                     src={`https://images.igdb.com/igdb/image/upload/t_1080p/${cover?.image_id}.png`}
                     alt=""
