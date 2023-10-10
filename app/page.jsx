@@ -43,29 +43,20 @@ export default async function Home({ searchParams }) {
 
   return (
     <main className="flex min-h-screen items-center justify-between p-24 flex-wrap">
-      <Game gameId={gameid} isSpecificGame={true} />
+      {gameid && <Game gameId={gameid} isSpecificGame={true} />}
 
-      <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
-      <article className="flex flex-wrap gap-10">
-        {search.map((game) => (
-          <Fragment key={game?.id}>
-            {/* <img
-              src={`https://images.igdb.com/igdb/image/upload/t_1080p/${screenshot.image_id}.png`}
-              alt=""
-              width={screenshot.width}
-              height={screenshot.height}
-            /> */}
-            {/* <iframe
-            width="462"
-            height="260"
-            src={`https://www.youtube.com/embed/${screenshot.video_id}`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-          ></iframe> */}
-            <Game gameId={game?.id} />
-          </Fragment>
-        ))}
-      </article>
+      {searchLine && (
+        <>
+          <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
+          <article className="flex flex-wrap gap-10">
+            {search.map((game) => (
+              <Fragment key={game?.id}>
+                <Game gameId={game?.id} />
+              </Fragment>
+            ))}
+          </article>
+        </>
+      )}
     </main>
   );
 }
