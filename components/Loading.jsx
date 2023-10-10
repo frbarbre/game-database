@@ -1,9 +1,7 @@
-"use client";
-
 export default function Loading() {
   return (
     <div className="flex justify-center items-center min-h-[100svh]">
-      <div className={`animate-spin`}>
+      <div className="animate-spin">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"

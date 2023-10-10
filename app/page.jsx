@@ -1,16 +1,15 @@
 import Game from "../components/Game";
 import { fetchGameData } from "../lib/fetchGameData";
-import { Fragment } from "react";
 
 export default async function Home({ searchParams }) {
   const searchLine = searchParams.search;
 
   const search = await fetchGameData(
     "games",
-    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & version_parent = null & parent_game = null & first_release_date != null & keywords != (2004, 2555) & keywords != null & category = 0; limit 20; sort first_release_date desc;`
+    `fields name, rating, aggregated_rating, genres, total_rating, first_release_date, keywords; where name ~ *"${searchLine}"* & total_rating != null & version_parent = null & first_release_date != null & keywords != (2004, 2555) & category = (0, 10); limit 100; sort total_rating desc;`
   );
   console.log(search);
-  
+
   const gameid = searchParams.id;
 
   const game = await fetchGameData(
@@ -30,7 +29,6 @@ export default async function Home({ searchParams }) {
     `fields *; where id = 70;`
   );
 
-
   const gameData = await fetchGameData(
     "games",
     `fields *; where id = ${gameid};`
@@ -44,9 +42,7 @@ export default async function Home({ searchParams }) {
           <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
           <article className="flex flex-wrap gap-10">
             {search.map((game) => (
-              <Fragment key={game?.id}>
-                <Game gameId={game?.id} />
-              </Fragment>
+              <Game gameId={game?.id} key={game?.id} />
             ))}
           </article>
         </>
