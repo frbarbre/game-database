@@ -1,5 +1,5 @@
-import Game from "@/components/Game";
-import { fetchGameData } from "@/lib/fetchGameData";
+import Game from "../components/Game";
+import { fetchGameData } from "../lib/fetchGameData";
 import { Fragment } from "react";
 
 export default async function Home({ searchParams }) {

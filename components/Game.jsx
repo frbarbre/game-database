@@ -1,4 +1,4 @@
-import { fetchGameData } from "@/lib/fetchGameData";
+import { fetchGameData } from "../lib/fetchGameData";
 
 export default async function Game({ gameId, isSpecificGame }) {
   const collectionItem = await fetchGameData(
@@ -52,7 +52,7 @@ export default async function Game({ gameId, isSpecificGame }) {
             );
           })}
           <img
-            src={`https://images.igdb.com/igdb/image/upload/t_1080p/${collectionCover[0]?.image_id}.png`}
+            src={`https://images.igdb.com/igdb/image/upload/t_720p/${collectionCover[0]?.image_id}.png`}
             alt=""
             width={collectionCover[0]?.width}
             height={collectionCover[0]?.height}
