@@ -50,10 +50,10 @@ export default async function Game({ gameId }) {
         );
       })}
       <img
-        src={`https://images.igdb.com/igdb/image/upload/t_1080p/${collectionCover[0].image_id}.png`}
+        src={`https://images.igdb.com/igdb/image/upload/t_1080p/${collectionCover[0]?.image_id}.png`}
         alt=""
-        width={collectionCover[0].width}
-        height={collectionCover[0].height}
+        width={collectionCover[0]?.width}
+        height={collectionCover[0]?.height}
         className="max-w-[300px]"
       />
       <h2 className="pt-10">RECOMMENDED</h2>
@@ -71,14 +71,14 @@ export default async function Game({ gameId }) {
 
               return (
                 <div key={game?.id}>
-                  <h2>{game.name}</h2>
+                  <h2>{game?.name}</h2>
                   <h3>{release?.human}</h3>
                   <h4>{game.aggregated_rating}</h4>
                   <img
                     src={`https://images.igdb.com/igdb/image/upload/t_1080p/${cover?.image_id}.png`}
                     alt=""
-                    width={collectionCover[0].width}
-                    height={collectionCover[0].height}
+                    width={collectionCover[0]?.width}
+                    height={collectionCover[0]?.height}
                     className="max-w-[300px]"
                   />
                 </div>
