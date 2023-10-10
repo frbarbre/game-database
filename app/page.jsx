@@ -44,7 +44,6 @@ export default async function Home({ searchParams }) {
   return (
     <main className="flex min-h-screen items-center justify-between p-24 flex-wrap">
       {gameid && <Game gameId={gameid} isSpecificGame={true} />}
-
       {searchLine && (
         <>
           <h1 className="text-lg font-bold">SEARCH RESULTS</h1>
